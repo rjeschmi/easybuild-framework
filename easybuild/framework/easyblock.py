@@ -1713,6 +1713,12 @@ class EasyBlock(object):
         if not fake:
             self.make_devel_module()
 
+        #return to state of not fake
+        if fake:
+            self.module_generator.set_fake(False)
+            mod_symlink_paths = ActiveMNS().det_module_symlink_paths(self.cfg)
+            modpath = self.module_generator.prepare(mod_symlink_paths)
+
         return modpath
 
     def permissions_step(self):
